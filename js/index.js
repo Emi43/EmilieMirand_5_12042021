@@ -7,12 +7,22 @@ class teddy {
         this.imageUrl= imageUrl;
     }
 }
-//creation d'un tableau//
+//creation d'un tableau avec tous les teddies//
 let teddies=[];
-
+//creation d'une fonction pour recuperer les teddies// 
+function getAllTeddies(){
+//transmission de l'URL des ressources à recuperer//      
 fetch("http://localhost:3000/api/teddies")
-.then(response => response.json() )
-.then(response => {displayteddies(response);})
-.catch(error =>    
-    {console.log(error);
-})
+            //format de reponse souhaitée en json//
+            .then(response => response.json())
+            //quand le traitement est terminé//
+            .then(response => {displayTeddies(response);
+            })
+            //quand une erreur se produit//
+            .catch(error => {   
+                console.log(error);
+            })
+}
+//
+function displayTeddies(response)
+    let section = document.getElementById("teddies");
