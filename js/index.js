@@ -23,6 +23,3 @@ fetch("http://localhost:3000/api/teddies")
                 console.log(error);
             })
 }
-//
-function displayTeddies(response)
-    let section = document.getElementById("teddies");
