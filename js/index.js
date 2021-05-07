@@ -1,25 +1,44 @@
-//creation d'un objet Teddy//
-class teddy {
-    constructor(name,descrition,price,imageUrl){
-        this.name= name;
-        this.descrition= descrition;
-        this.price= price;
-        this.imageUrl= imageUrl;
-    }
-}
-//creation d'un tableau avec tous les teddies//
-let teddies=[];
-//creation d'une fonction pour recuperer les teddies// 
+const apiUrl = "http://localhost:3000/api/teddies";
+
+//création d'une fonction pour récupérer tous les produits "teddies" de l'api"
 function getAllTeddies(){
-//transmission de l'URL des ressources à recuperer//      
-fetch("http://localhost:3000/api/teddies")
-            //format de reponse souhaitée en json//
-            .then(response => response.json())
-            //quand le traitement est terminé//
-            .then(response => {displayTeddies(response);
-            })
-            //quand une erreur se produit//
+        fetch(apiUrl)
+//format de reponse souhaitée en json//
+            .then(response =>{
+            console.log(response)    
+            return response.json();
+})            
+//quand le traitement est terminé//
+            .then(response => {
+            console.log(response)
+            displayTeddies(response);
+
+})
+//quand une erreur se produit//
             .catch(error => {   
-                console.log(error);
-            })
+            console.log(error);
+})
 }
+window.onload = getAllTeddies();
+//permet l'affichage des éléments passés en paramètre (response)//
+function displayTeddies(response){
+    let section = document.getElementById("teddies");
+    for(let i = 0; i < response.length; i++) {
+        //mise en place d'une balise article pour la mise en page des produits//
+        let teddy = document.createElement("article");
+            teddy.innerHTML += "<h2>" +
+                response[i].name +
+                "</h2>" +
+                "<img width='100%' src='" + response[i].imageUrl + "'>" +
+                "<p>" +
+                response[i].description +
+                "</p>" +
+                "<p>" +
+                response[i].price / 100 + "€" +
+                "</p>" +
+                "<a href='produit.html?id=" + response[i]._id + "'>Voir le produit</a>"
+            section.appendChild(teddy);    
+        }
+}
+
+
