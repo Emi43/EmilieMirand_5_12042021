@@ -63,15 +63,9 @@ function addProduct(){
       card=[]
     } 
      const panier = JSON.parse(localStorage.getItem("panier"))  //On extrait notre json ou on crée un tableau si le panier est vide
-        panier.push({ //pour chaque article, on pousse les infos suivantes dans le panier
-          image : article.imageUrl,
-          name : article.name,
-          id :article._id,
-          description : article.description,
-          price : article.price/100,
-          quantite : 1,
-          subTotal : article.price/100*1
-        })
+        panier.push(article );//pour chaque article, on pousse les infos suivantes dans le panier
+        
+        
         window.localStorage.setItem("panier", JSON.stringify(panier))
         //console.log(panier)
         console.log("Le produit a été ajouté au panier"); 
